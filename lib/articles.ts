@@ -15,7 +15,7 @@ export const articles: Article[] = [
   {
   slug: "mathematics-of-energy-reliability",
   title: "The Mathematics of Reliability: Engineering Resilient Power Systems",
-  image: "/articles/article-reliability-math.jpg",
+  image: "/articles/article-reliability-math.png",
   alt: "Complex engineering calculations showing MTBF and system availability constants",
   excerpt: "An analytical deep-dive into the mathematical modeling of power system uptime and the physics of voltage regulation in industrial microgrids.",
   seo: {
@@ -39,7 +39,7 @@ export const articles: Article[] = [
   {
   slug: "hybrid-power-industrial-operations",
   title: "The Role of Hybrid Power in Industrial Operations: Engineering for Efficiency",
-  image: "/articles/article-hybrid-power.jpg",
+  image: "/articles/article-hybrid-power.png",
   alt: "Hybrid microgrid architecture integrating PV, BESS, and thermal generation",
   excerpt: "An analytical exploration of hybrid energy systems, focusing on fuel displacement, load-sharing physics, and the reduction of Levelized Cost of Energy (LCOE).",
   seo: {

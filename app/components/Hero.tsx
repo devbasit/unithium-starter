@@ -13,7 +13,7 @@ export default function Hero() {
         />
       </div>
       {/* <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" /> */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/50 to-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/55" />
       <div className="absolute inset-0 flex items-center">
         <div className="mx-auto max-w-7xl px-6">
           <h1 className="text-4xl md:text-5xl font-semibold text-white max-w-2xl">
