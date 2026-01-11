@@ -51,6 +51,7 @@ export default function EnergyCalculatorPage() {
     const imgData = await toPng(elem, { cacheBust: true });
     const pdf = new jsPDF({ unit: 'pt', format: 'a4' });
     const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight() - 40; // margins
 
     // get image dimensions by creating an Image
     const img = new Image();
@@ -58,7 +59,16 @@ export default function EnergyCalculatorPage() {
     await new Promise((res) => (img.onload = res));
     const imgWidth = pageWidth - 40;
     const imgHeight = (img.height * imgWidth) / img.width;
-    pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+
+    // calculate number of pages
+    const numPages = Math.ceil(imgHeight / pageHeight);
+
+    for (let i = 0; i < numPages; i++) {
+      if (i > 0) pdf.addPage();
+      const yPos = 20 - i * pageHeight;
+      pdf.addImage(imgData, 'PNG', 20, yPos, imgWidth, imgHeight);
+    }
+
     pdf.save('unithium-quote.pdf');
   };
 
@@ -94,9 +104,8 @@ export default function EnergyCalculatorPage() {
           <div className="flex items-start justify-between border-b pb-3">
             <div className="flex items-center gap-3">
               <img src="/unithium-logo-text-rc-nobg.png" alt="Unithium" className="h-12" />
-              <div>
-                <div className="text-sm font-semibold">Unithium Energy Systems LTD</div>
-                <div className="text-xs text-gray-600">Lagos, Nigeria</div>
+              <div className="text-sm font-semibold">
+                Unithium Energy Systems LTD - Lagos, Nigeria
               </div>
             </div>
             <div className="text-right text-xs text-gray-600">
