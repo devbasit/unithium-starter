@@ -2,6 +2,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { articles } from "@/lib/articles";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"; // Fallback if env var missing
+
+export const metadata = {
+  title: "Insights & Articles | Unithium Energy Systems",
+  description:
+    "Engineering perspectives and industry insights on reliable energy systems, sustainability, and power technology.",
+  openGraph: {
+    title: "Insights & Articles | Unithium Energy Systems",
+    description:
+      "Engineering perspectives and industry insights on reliable energy systems.",
+    images: [
+      {
+        url: `${siteUrl}/unithium-logo-wt-rc.png`, // Absolute URL for og:image (fallback logo)
+        width: 1200,
+        height: 630,
+        alt: "Unithium Energy Systems Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insights & Articles | Unithium Energy Systems",
+    description: "Engineering perspectives on energy systems.",
+    images: [`${siteUrl}/unithium-logo-wt-rc.png`],
+  },
+};
+
 export default function BlogPage() {
   return (
     <main className="py-20">
@@ -36,9 +63,7 @@ export default function BlogPage() {
                 {article.title}
               </h2>
 
-              <p className="mt-2 text-gray-600">
-                {article.excerpt}
-              </p>
+              <p className="mt-2 text-gray-600">{article.excerpt}</p>
             </Link>
           ))}
         </div>

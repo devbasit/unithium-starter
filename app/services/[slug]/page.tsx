@@ -1,16 +1,47 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import LatexContent from "@/app/components/LatexContent";
 import { services } from "@/lib/services";
+import LatexContent from "@/app/components/LatexContent";
 
-type Props = { params: { slug: string } };
+type Props = {
+  params: { slug: string };
+};
 
 export function generateMetadata({ params }: Props) {
-  const service = services.find((s) => s.slug === params.slug);
-  if (!service) return {};
+  const project = services.find(
+    (p) => p.slug === params.slug
+  );
+
+  if (!project) {
+    return {};
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'; // Fallback if env var missing
+  const imageUrl = `${siteUrl}${project.image}`; // Build absolute URL
+
   return {
-    title: service.seo.title,
-    description: service.seo.description,
+    title: project.seo.title,
+    description: project.seo.description,
+    openGraph: {
+      title: project.seo.title,
+      description: project.seo.description,
+      type: 'article', // Add for better sharing
+      url: `${siteUrl}/services/${params.slug}`, // Add canonical URL
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: project.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.seo.title,
+      description: project.seo.description,
+      images: [imageUrl],
+    },
   };
 }
 

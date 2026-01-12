@@ -2,6 +2,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"; // Fallback if env var missing
+
+export const metadata = {
+  title: "Our Projects & Solutions | Unithium Energy Systems",
+  description:
+    "Discover Unithium's engineered power systems and solutions for industrial applications, including microgrids and energy storage.",
+  openGraph: {
+    title: "Our Projects & Solutions | Unithium Energy Systems",
+    description:
+      "Discover Unithium's engineered power systems and solutions for industrial applications.",
+    images: [
+      {
+        url: `${siteUrl}/unithium-logo-wt-rc.png`, // Absolute URL for og:image (fallback logo)
+        width: 1200,
+        height: 630,
+        alt: "Unithium Energy Systems Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Projects & Solutions | Unithium Energy Systems",
+    description: "Discover Unithium's engineered power systems.",
+    images: [`${siteUrl}/unithium-logo-wt-rc.png`],
+  },
+};
+
 export default function ProjectsPage() {
   return (
     <main className="py-20">
@@ -36,9 +63,7 @@ export default function ProjectsPage() {
                 {project.title}
               </h2>
 
-              <p className="mt-2 text-gray-600">
-                {project.excerpt}
-              </p>
+              <p className="mt-2 text-gray-600">{project.excerpt}</p>
             </Link>
           ))}
         </div>

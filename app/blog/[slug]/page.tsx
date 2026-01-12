@@ -10,31 +10,49 @@ type Props = {
 };
 
 export function generateMetadata({ params }: Props) {
-  const article = articles.find(
-    (a) => a.slug === params.slug
+  const project = articles.find(
+    (p) => p.slug === params.slug
   );
 
-  if (!article) {
+  if (!project) {
     return {};
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'; // Fallback if env var missing
+  const imageUrl = `${siteUrl}${project.image}`; // Build absolute URL
+
   return {
-    title: article.seo.title,
-    description: article.seo.description,
+    title: project.seo.title,
+    description: project.seo.description,
     openGraph: {
-      title: article.seo.title,
-      description: article.seo.description,
-      images: [article.image],
+      title: project.seo.title,
+      description: project.seo.description,
+      type: 'article', // Add for better sharing
+      url: `${siteUrl}/articles/${params.slug}`, // Add canonical URL
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: project.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.seo.title,
+      description: project.seo.description,
+      images: [imageUrl],
     },
   };
 }
 
 export default function ArticlePage({ params }: Props) {
-  const article = articles.find(
-    (a) => a.slug === params.slug
+  const project = articles.find(
+    (p) => p.slug === params.slug
   );
 
-  if (!article) {
+  if (!project) {
     notFound();
   }
 
@@ -42,13 +60,13 @@ export default function ArticlePage({ params }: Props) {
     <main className="py-20">
       <article className="mx-auto max-w-3xl px-6">
         <h1 className="text-3xl font-semibold text-unithiumBlue">
-          {article.title}
+          {project.title}
         </h1>
 
         <div className="mt-8">
           <Image
-            src={article.image}
-            alt={article.alt}
+            src={project.image}
+            alt={project.alt}
             width={800}
             height={420}
             className="rounded-lg object-cover"
@@ -57,7 +75,7 @@ export default function ArticlePage({ params }: Props) {
         </div>
 
         <div className="mt-8">
-          <LatexContent content={article.content} />
+          <LatexContent content={project.content} />
         </div>
       </article>
     </main>

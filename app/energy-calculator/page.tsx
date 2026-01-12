@@ -10,6 +10,31 @@ import {
   sizeSolarArray,
 } from "@/lib/power-math";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'; // Fallback if env var missing
+
+export const metadata = {
+  title: "Energy Calculator | Unithium Power Sizing Tool",
+  description: "Calculate your power needs with Unithium's professional energy calculator. Size inverters, solar arrays, and batteries for reliable systems.",
+  openGraph: {
+    title: "Energy Calculator | Unithium Power Sizing Tool",
+    description: "Calculate your power needs with Unithium's professional energy calculator.",
+    images: [
+      {
+        url: `${siteUrl}/unithium-logo-wt-rc.png`, // Absolute URL for og:image (fallback logo)
+        width: 1200,
+        height: 630,
+        alt: "Unithium Energy Systems Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Energy Calculator | Unithium Power Sizing Tool",
+    description: "Calculate your power needs professionally.",
+    images: [`${siteUrl}/unithium-logo-wt-rc.png`],
+  },
+};
+
 export default function EnergyCalculatorPage() {
   const [appliances, setAppliances] = useState<Appliance[]>([]);
   const quoteRef = useRef<HTMLDivElement | null>(null);

@@ -16,13 +16,31 @@ export function generateMetadata({ params }: Props) {
     return {};
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'; // Fallback if env var missing
+  const imageUrl = `${siteUrl}${project.image}`; // Build absolute URL
+
   return {
     title: project.seo.title,
     description: project.seo.description,
     openGraph: {
       title: project.seo.title,
       description: project.seo.description,
-      images: [project.image],
+      type: 'article', // Add for better sharing
+      url: `${siteUrl}/projects/${params.slug}`, // Add canonical URL
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: project.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.seo.title,
+      description: project.seo.description,
+      images: [imageUrl],
     },
   };
 }
