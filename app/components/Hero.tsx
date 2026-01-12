@@ -24,7 +24,7 @@ export default function Hero() {
             for industrial, commercial, and emerging energy needs.
           </p>
           <a
-            href="/solutions"
+            href="/projects"
             className="inline-block mt-6 rounded-md bg-unithiumGreen px-6 py-3 text-white font-medium"
           >
             Explore our solutions →
