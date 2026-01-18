@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function NavBar() {
@@ -20,8 +21,14 @@ export default function NavBar() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
       <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-unithiumBlue">
-          Unithium
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/unithium-logo-text-rc-nobg.png"
+            alt="Unithium Energy Systems logo"
+            width={140}
+            height={36}
+            priority
+          />
         </Link>
 
         <nav className="hidden md:flex gap-6">

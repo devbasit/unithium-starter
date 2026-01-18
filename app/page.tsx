@@ -17,7 +17,7 @@ export const metadata = {
       "Engineering dependable energy systems for industrial, commercial, and emerging needs. Explore our services, projects, and energy calculator.",
     images: [
       {
-        url: `${siteUrl}/hero/hero-power-unit.png`, // Absolute URL for og:image
+        url: `${siteUrl}/hero-power-unit.png`, // Absolute URL for og:image
         width: 1200,
         height: 630,
         alt: "Engineered power generation and distribution system",
