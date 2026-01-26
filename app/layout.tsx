@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import NavBar from './components/NavBar';
 
+const inter = Inter({ subsets: ['latin'] });
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com";
 
 export const metadata = {
